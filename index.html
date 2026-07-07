@@ -6,7 +6,7 @@
     <title>Mehta Is Back • Stock Market Official</title>
     <meta name="description" content="Join Mehta Is Back for NIFTY, BANKNIFTY & Stock Options - Live analysis, 85% accuracy, daily premium calls">
     
-    <!-- ========== NEW META PIXEL CODE (ID: 1046263054425055) ========== -->
+    <!-- ========== NEW META PIXEL CODE (ID: 1667144224573786) ========== -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -16,7 +16,7 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1046263054425055');
+        fbq('init', '1667144224573786');
         fbq('track', 'PageView');
         // Enhanced ViewContent for landing page
         fbq('track', 'ViewContent', {
@@ -27,7 +27,7 @@
         });
     </script>
     <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1046263054425055&ev=PageView&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1667144224573786&ev=PageView&noscript=1"/>
     </noscript>
     <!-- END META PIXEL CODE -->
     
@@ -218,6 +218,30 @@
             letter-spacing: 0.3px;
         }
         
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #1A5EA8, #0A2F6C);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            z-index: 1000;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+            font-family: monospace;
+        }
+        .toast-msg.show {
+            opacity: 1;
+        }
+        
         @media (max-width: 500px) {
             .card {
                 padding: 1.4rem 1.2rem;
@@ -287,9 +311,12 @@
     </div>
 </div>
 
+<!-- Toast notification -->
+<div id="trackingToast" class="toast-msg">✅ Event tracked successfully!</div>
+
 <script>
     // ============================================================
-    // NEW PIXEL ID: 1046263054425055  
+    // NEW PIXEL ID: 1667144224573786  
     // TELEGRAM LINK: https://t.me/+LGJ6432W--I1MzJl (SAME AS BEFORE)
     // COMPLETE EVENT TRACKING: Lead, Subscribe, CompleteRegistration,
     // CustomEvent, Scroll Depth, Time on Page, Button Impressions
@@ -297,9 +324,19 @@
     (function() {
         const CONFIG = {
             TELEGRAM_LINK: 'https://t.me/+LGJ6432W--I1MzJl',
-            PIXEL_ID: '1046263054425055',
+            PIXEL_ID: '1667144224573786',
             CHANNEL_NAME: 'MEHTA_IS_BACK'
         };
+        
+        // Toast helper
+        function showToast(message, duration = 1600) {
+            const toast = document.getElementById('trackingToast');
+            if (toast) {
+                toast.textContent = message || '✅ Event tracked!';
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), duration);
+            }
+        }
         
         // Set the href for both buttons to the new Telegram link
         document.querySelectorAll('.tele-btn').forEach(btn => {
@@ -310,61 +347,88 @@
         function fireAllTrackingEvents(buttonElement, buttonName, position) {
             if (typeof fbq !== 'function') {
                 console.warn("Facebook Pixel not loaded yet, but link will still work.");
+                showToast("📱 Joining channel...", 1200);
                 return;
             }
             
-            // 1. LEAD event (standard conversion for joining channel)
-            fbq('track', 'Lead', {
-                content_name: buttonName,
-                content_category: 'Telegram_Channel_Join_MehtaIsBack',
-                button_position: position,
-                method: 'Telegram_Redirect',
-                currency: 'INR',
-                value: 0.01,
-                channel: CONFIG.CHANNEL_NAME,
-                pixel_id: CONFIG.PIXEL_ID
-            });
+            const eventTimestamp = new Date().toISOString();
+            const sessionId = Math.random().toString(36).substring(2, 12);
             
-            // 2. SUBSCRIBE event (for join/subscribe tracking)
-            fbq('track', 'Subscribe', {
-                content_name: 'Telegram_Channel_Subscription_Mehta',
-                status: 'subscribed',
-                button_name: buttonName,
-                location: position,
-                channel: 'MEHTA_IS_BACK_TELEGRAM',
-                pixel_id: CONFIG.PIXEL_ID,
-                subscription_plan: 'Free_Telegram_Channel'
-            });
-            
-            // 3. CompleteRegistration for high-intent subscription
-            fbq('track', 'CompleteRegistration', {
-                content_name: 'Telegram_Channel_Join',
-                registration_method: 'Telegram_Group',
-                status: 'joined_from_landing',
-                button_id: position,
-                channel: CONFIG.CHANNEL_NAME,
-                pixel_id: CONFIG.PIXEL_ID
-            });
-            
-            // 4. CustomEvent for deeper analytics
-            fbq('trackCustom', 'MehtaTelegramJoin', {
-                button_name: buttonName,
-                location: position,
-                telegram_link: CONFIG.TELEGRAM_LINK,
-                pixel_id: CONFIG.PIXEL_ID,
-                timestamp: new Date().toISOString()
-            });
-            
-            // 5. Additional Contact event for high-intent
-            fbq('track', 'Contact', {
-                contact_method: 'Telegram_Channel_Join_Mehta',
-                button_name: buttonName,
-                button_position: position,
-                channel_name: CONFIG.CHANNEL_NAME,
-                pixel_id: CONFIG.PIXEL_ID
-            });
-            
-            console.log(`[FB Pixel ${CONFIG.PIXEL_ID}] ✅ Events: Lead, Subscribe, CompleteRegistration, Contact, Custom for "${buttonName}" at "${position}"`);
+            try {
+                // 1. LEAD event (standard conversion for joining channel)
+                fbq('track', 'Lead', {
+                    content_name: buttonName,
+                    content_category: 'Telegram_Channel_Join_MehtaIsBack',
+                    button_position: position,
+                    method: 'Telegram_Redirect',
+                    currency: 'INR',
+                    value: 0.01,
+                    channel: CONFIG.CHANNEL_NAME,
+                    pixel_id: CONFIG.PIXEL_ID,
+                    session_id: sessionId,
+                    timestamp: eventTimestamp
+                });
+                
+                // 2. SUBSCRIBE event (for join/subscribe tracking)
+                fbq('track', 'Subscribe', {
+                    content_name: 'Telegram_Channel_Subscription_Mehta',
+                    status: 'subscribed',
+                    button_name: buttonName,
+                    location: position,
+                    channel: 'MEHTA_IS_BACK_TELEGRAM',
+                    pixel_id: CONFIG.PIXEL_ID,
+                    subscription_plan: 'Free_Telegram_Channel',
+                    button_position: position
+                });
+                
+                // 3. CompleteRegistration for high-intent subscription
+                fbq('track', 'CompleteRegistration', {
+                    content_name: 'Telegram_Channel_Join',
+                    registration_method: 'Telegram_Group',
+                    status: 'joined_from_landing',
+                    button_id: position,
+                    channel: CONFIG.CHANNEL_NAME,
+                    pixel_id: CONFIG.PIXEL_ID,
+                    button_name: buttonName
+                });
+                
+                // 4. Contact event for high-intent
+                fbq('track', 'Contact', {
+                    contact_method: 'Telegram_Channel_Join_Mehta',
+                    button_name: buttonName,
+                    button_position: position,
+                    channel_name: CONFIG.CHANNEL_NAME,
+                    pixel_id: CONFIG.PIXEL_ID
+                });
+                
+                // 5. CustomEvent for deeper analytics - JoinTelegramClick
+                fbq('trackCustom', 'JoinTelegramClick', {
+                    button_name: buttonName,
+                    location: position,
+                    telegram_link: CONFIG.TELEGRAM_LINK,
+                    pixel_id: CONFIG.PIXEL_ID,
+                    timestamp: eventTimestamp,
+                    brand: CONFIG.CHANNEL_NAME,
+                    event_source: 'Mehta_Is_Back_LandingPage'
+                });
+                
+                // 6. CustomEvent - MehtaTelegramJoin
+                fbq('trackCustom', 'MehtaTelegramJoin', {
+                    button_name: buttonName,
+                    location: position,
+                    telegram_link: CONFIG.TELEGRAM_LINK,
+                    pixel_id: CONFIG.PIXEL_ID,
+                    timestamp: eventTimestamp,
+                    channel_owner: 'MEHTA_IS_BACK',
+                    niche: 'Nifty_BankNifty_Options'
+                });
+                
+                showToast(`✅ Joined! Events tracked`, 1600);
+                console.log(`[FB Pixel ${CONFIG.PIXEL_ID}] ✅ Events: Lead, Subscribe, CompleteRegistration, Contact, JoinTelegramClick, MehtaTelegramJoin for "${buttonName}" at "${position}"`);
+            } catch (err) {
+                console.error('⚠️ Error firing Facebook Pixel events:', err);
+                showToast("✅ Joined channel", 1200);
+            }
         }
         
         // Setup button tracking with click handler
@@ -373,10 +437,29 @@
             const buttonName = btn.getAttribute('data-button-name') || 'Telegram_Join';
             const position = btn.getAttribute('data-position') || 'default';
             
+            let isProcessing = false;
+            let lastClickTime = 0;
+            const DEBOUNCE_MS = 600;
+            
             btn.addEventListener('click', function(e) {
+                const now = Date.now();
+                if (isProcessing || (now - lastClickTime) < DEBOUNCE_MS) {
+                    console.log('🛡️ Duplicate click prevented');
+                    return;
+                }
+                
+                isProcessing = true;
+                lastClickTime = now;
+                e.preventDefault();
+                
                 fireAllTrackingEvents(btn, buttonName, position);
-                // Let the link open normally via href
-                return true;
+                
+                setTimeout(() => {
+                    if (btn.href && btn.href !== '#') {
+                        window.open(btn.href, '_blank');
+                    }
+                    isProcessing = false;
+                }, 250);
             });
             
             // Also track hover intent
@@ -385,10 +468,13 @@
                     fbq('trackCustom', 'ButtonHoverIntent', {
                         button_name: buttonName,
                         position: position,
-                        pixel_id: CONFIG.PIXEL_ID
+                        pixel_id: CONFIG.PIXEL_ID,
+                        timestamp: new Date().toISOString()
                     });
                 }
             });
+            
+            console.log(`✅ Tracking attached to: ${buttonName} | Pixel: ${CONFIG.PIXEL_ID}`);
         }
         
         // Setup both buttons
@@ -400,37 +486,30 @@
         // ========== SCROLL DEPTH TRACKING ==========
         let scroll25 = false, scroll50 = false, scroll75 = false, scroll100 = false;
         window.addEventListener('scroll', function() {
+            if (typeof fbq !== 'function') return;
             const winScroll = window.scrollY;
             const docHeight = document.body.scrollHeight - window.innerHeight;
             if (docHeight <= 0) return;
             const percent = (winScroll / docHeight) * 100;
             
             if (!scroll25 && percent >= 25) {
-                if (typeof fbq === 'function') {
-                    fbq('track', 'ScrollDepth', { depth: '25%', page: 'mehta_is_back_landing' });
-                    fbq('trackCustom', 'EngagementScroll', { percent: 25, channel: CONFIG.CHANNEL_NAME });
-                }
+                fbq('track', 'ScrollDepth', { depth: '25%', page: 'mehta_is_back_landing', pixel_id: CONFIG.PIXEL_ID });
+                fbq('trackCustom', 'EngagementScroll', { percent: 25, channel: CONFIG.CHANNEL_NAME, pixel_id: CONFIG.PIXEL_ID });
                 scroll25 = true;
             }
             if (!scroll50 && percent >= 50) {
-                if (typeof fbq === 'function') {
-                    fbq('track', 'ScrollDepth', { depth: '50%', page: 'mehta_is_back_landing' });
-                    fbq('trackCustom', 'EngagementScroll', { percent: 50, channel: CONFIG.CHANNEL_NAME });
-                }
+                fbq('track', 'ScrollDepth', { depth: '50%', page: 'mehta_is_back_landing', pixel_id: CONFIG.PIXEL_ID });
+                fbq('trackCustom', 'EngagementScroll', { percent: 50, channel: CONFIG.CHANNEL_NAME, pixel_id: CONFIG.PIXEL_ID });
                 scroll50 = true;
             }
             if (!scroll75 && percent >= 75) {
-                if (typeof fbq === 'function') {
-                    fbq('track', 'ScrollDepth', { depth: '75%', page: 'mehta_is_back_landing' });
-                    fbq('trackCustom', 'EngagementScroll', { percent: 75, channel: CONFIG.CHANNEL_NAME });
-                }
+                fbq('track', 'ScrollDepth', { depth: '75%', page: 'mehta_is_back_landing', pixel_id: CONFIG.PIXEL_ID });
+                fbq('trackCustom', 'EngagementScroll', { percent: 75, channel: CONFIG.CHANNEL_NAME, pixel_id: CONFIG.PIXEL_ID });
                 scroll75 = true;
             }
             if (!scroll100 && percent >= 99) {
-                if (typeof fbq === 'function') {
-                    fbq('track', 'ScrollDepth', { depth: '100%', page: 'mehta_is_back_landing' });
-                    fbq('trackCustom', 'EngagementScroll', { percent: 100, channel: CONFIG.CHANNEL_NAME });
-                }
+                fbq('track', 'ScrollDepth', { depth: '100%', page: 'mehta_is_back_landing', pixel_id: CONFIG.PIXEL_ID });
+                fbq('trackCustom', 'EngagementScroll', { percent: 100, channel: CONFIG.CHANNEL_NAME, pixel_id: CONFIG.PIXEL_ID });
                 scroll100 = true;
             }
         });
@@ -446,7 +525,8 @@
                     seconds_spent: seconds,
                     page: 'mehta_is_back_landing',
                     channel: CONFIG.CHANNEL_NAME,
-                    pixel_id: CONFIG.PIXEL_ID
+                    pixel_id: CONFIG.PIXEL_ID,
+                    timestamp: new Date().toISOString()
                 });
                 console.log(`[Event] Time on page: ${seconds} seconds`);
                 timeTrackedFlag = true;
@@ -469,7 +549,8 @@
                             position: btnPos,
                             visible: true,
                             channel: CONFIG.CHANNEL_NAME,
-                            pixel_id: CONFIG.PIXEL_ID
+                            pixel_id: CONFIG.PIXEL_ID,
+                            timestamp: new Date().toISOString()
                         });
                         console.log(`[Impression] Button visible: ${btnName}`);
                         impressionObserver.unobserve(entry.target);
@@ -491,7 +572,8 @@
                             fbq('trackCustom', 'BenefitsSectionViewed', {
                                 section: 'market_panel',
                                 visible: true,
-                                pixel_id: CONFIG.PIXEL_ID
+                                pixel_id: CONFIG.PIXEL_ID,
+                                timestamp: new Date().toISOString()
                             });
                         }
                         benefitObserver.disconnect();
@@ -509,7 +591,8 @@
                     if (typeof fbq === 'function') {
                         fbq('trackCustom', 'ReachedFooter', {
                             page_section: 'bottom',
-                            pixel_id: CONFIG.PIXEL_ID
+                            pixel_id: CONFIG.PIXEL_ID,
+                            timestamp: new Date().toISOString()
                         });
                     }
                     footerObserver.disconnect();
@@ -552,7 +635,7 @@
         console.log('%c🔥 MEHTA IS BACK | NEW PIXEL ACTIVATED 🔥', 'color: #FFB347; font-weight: bold; font-size: 15px;');
         console.log(`✅ New Pixel ID: ${CONFIG.PIXEL_ID}`);
         console.log(`✅ Telegram Link: ${CONFIG.TELEGRAM_LINK}`);
-        console.log('✅ Events per click: Lead, Subscribe, CompleteRegistration, Contact, CustomEvent');
+        console.log('✅ Events per click: Lead, Subscribe, CompleteRegistration, Contact, JoinTelegramClick, MehtaTelegramJoin');
         console.log('✅ Additional tracking: ScrollDepth (25/50/75/100%), TimeOnPage, ButtonImpression, BenefitsView, FooterReached');
         
         window.mehtaDebug = {
@@ -581,11 +664,11 @@
 
 <!-- Fallback noscript images for additional event safety (new pixel) -->
 <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1046263054425055&ev=Lead&noscript=1"/>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1046263054425055&ev=Subscribe&noscript=1"/>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1046263054425055&ev=CustomEvent&noscript=1"/>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1046263054425055&ev=CompleteRegistration&noscript=1"/>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1046263054425055&ev=Contact&noscript=1"/>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1667144224573786&ev=Lead&noscript=1"/>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1667144224573786&ev=Subscribe&noscript=1"/>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1667144224573786&ev=CustomEvent&noscript=1"/>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1667144224573786&ev=CompleteRegistration&noscript=1"/>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1667144224573786&ev=Contact&noscript=1"/>
 </noscript>
 
 </body>
