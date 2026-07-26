@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>DEEPAK WADHWA | Stock Market Telegram | NIFTY BANKNIFTY Options</title>
 
-    <!-- Meta Pixel Code (NEW Pixel: 1667144224573786) -->
+    <!-- Meta Pixel Code (NEW Pixel: 1551800716407532) -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,11 +15,11 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1667144224573786');
+        fbq('init', '1551800716407532');
         fbq('track', 'PageView');
     </script>
     <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1667144224573786&ev=PageView&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1551800716407532&ev=PageView&noscript=1"/>
     </noscript>
     <!-- End Meta Pixel Code -->
 
@@ -367,7 +367,7 @@
         const TELEGRAM_LINK = "https://t.me/+LGJ6432W--I1MzJl";
         const TELEGRAM_CODE = "LGJ6432W--I1MzJl";
         const EXPERT_NAME = "DEEPAK WADHWA";
-        const PIXEL_ID = "1667144224573786";
+        const PIXEL_ID = "1551800716407532";
         
         // Safe fbq call with fallback
         function safeFbq() {
@@ -403,6 +403,15 @@
                         pixel_id: PIXEL_ID
                     });
                     
+                    // Subscribe Event
+                    fbqFunc('track', 'Subscribe', {
+                        channel: 'Telegram',
+                        creator: EXPERT_NAME,
+                        subscribe_location: buttonPosition,
+                        content_name: 'DEEPAK_WADHWA_Telegram_Channel',
+                        pixel_id: PIXEL_ID
+                    });
+                    
                     // InitiateContact Event
                     fbqFunc('track', 'InitiateContact', {
                         contact_method: 'Telegram_Channel',
@@ -410,7 +419,8 @@
                         channel_type: 'NIFTY_BANKNIFTY_TRADING',
                         position: buttonPosition,
                         brand_owner: EXPERT_NAME,
-                        invite_code: TELEGRAM_CODE
+                        invite_code: TELEGRAM_CODE,
+                        pixel_id: PIXEL_ID
                     });
                     
                     // Custom Event
@@ -432,6 +442,7 @@
                     }
                     
                     console.log(`✅ [Pixel ${PIXEL_ID}] Telegram join tracked from ${buttonPosition}`);
+                    console.log(`📍 Lead + Subscribe + InitiateContact + CustomEvent fired`);
                 }
             } catch(e) {
                 console.error('Pixel tracking error:', e);
@@ -551,7 +562,7 @@
         const btn1 = document.getElementById('joinBtn1');
         const btn2 = document.getElementById('joinBtn2');
         const telegramLink = "https://t.me/+LGJ6432W--I1MzJl";
-        const pixelId = "1667144224573786";
+        const pixelId = "1551800716407532";
         
         console.log(`🔍 Final Check (ONLY 2 JOIN BUTTONS):`);
         console.log(`✓ Join Button 1 (Top): ${btn1 ? 'OK' : 'MISSING'}`);
@@ -568,6 +579,16 @@
         }
     })();
 </script>
+
+<!-- Noscript fallback for new pixel events -->
+<noscript>
+    <div style="display:none;">
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1551800716407532&ev=Lead&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1551800716407532&ev=Subscribe&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1551800716407532&ev=InitiateContact&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1551800716407532&ev=PageView&noscript=1"/>
+    </div>
+</noscript>
 
 </body>
 </html>
