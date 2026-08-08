@@ -140,43 +140,6 @@
             transform: scale(0.96);
         }
 
-        .subscribe-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            background: linear-gradient(135deg, #dc2626, #b91c1c, #991b1b);
-            border: none;
-            padding: 14px 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-align: center;
-            border-radius: 60px;
-            transition: all 0.2s ease;
-            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3);
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            margin-top: 16px;
-            width: 100%;
-        }
-
-        .subscribe-btn:hover {
-            background: linear-gradient(135deg, #b91c1c, #991b1b, #7f1d1d);
-            transform: scale(0.98);
-        }
-
-        .subscribe-btn:active {
-            transform: scale(0.96);
-        }
-
-        .subscribe-btn:disabled {
-            opacity: 0.7;
-            transform: none;
-            cursor: default;
-        }
-
         .top-button {
             margin-bottom: 20px;
         }
@@ -307,10 +270,6 @@
                 padding: 14px 10px;
                 font-size: 1rem;
             }
-            .subscribe-btn {
-                padding: 12px 10px;
-                font-size: 0.95rem;
-            }
             .point-text {
                 font-size: 0.85rem;
             }
@@ -380,11 +339,6 @@
                 ⚠️ DISCLAIMER :- DAILY 2 FREE DEMO CALLS ✅
             </div>
         </div>
-
-        <!-- ✅ SUBSCRIBE BUTTON -->
-        <button id="subscribeButton" class="subscribe-btn">
-            🔔 SUBSCRIBE TO UPDATES 🔔
-        </button>
 
         <!-- ✅ BUTTON 2 - BOTTOM TELEGRAM (NEW LINK) -->
         <div class="bottom-button">
@@ -479,77 +433,6 @@
             return true;
         }
         
-        // ---------- SUBSCRIBE BUTTON TRACKING ----------
-        function handleSubscribeClick(event) {
-            event.preventDefault();
-            
-            const subBtn = document.getElementById('subscribeButton');
-            if (subBtn && subBtn.disabled) return;
-            
-            try {
-                const fbqFunc = safeFbq();
-                if (typeof fbqFunc === 'function') {
-                    // Subscribe Event
-                    fbqFunc('track', 'Subscribe', {
-                        content_name: 'DEEPAK_WADHWA_Market_Updates',
-                        content_category: 'NIFTY_BANKNIFTY_Options_Subscription',
-                        subscription_type: 'daily_free_calls',
-                        accuracy_rate: '85-95%',
-                        source: 'landing_page_card',
-                        owner: EXPERT_NAME
-                    });
-                    
-                    // Lead Event
-                    fbqFunc('track', 'Lead', {
-                        content_name: 'DEEPAK_WADHWA_Update_Subscription',
-                        content_category: 'Stock_Market_Lead',
-                        value: 1,
-                        currency: 'INR',
-                        method: 'subscribe_button_click',
-                        lead_type: 'market_updates_subscription',
-                        owner_name: EXPERT_NAME
-                    });
-                    
-                    // Custom Event
-                    fbqFunc('trackCustom', 'SubscribeButtonClick_DEEPAK', {
-                        location: 'main_card_center',
-                        user_action: 'click_subscribe_updates',
-                        timestamp_ms: Date.now(),
-                        trader: EXPERT_NAME
-                    });
-                    
-                    // Contact Event
-                    fbqFunc('track', 'Contact', {
-                        contact_type: 'website_subscription',
-                        content_name: 'DEEPAK_WADHWA_OptIn',
-                        channel: 'organic_landing',
-                        owner: EXPERT_NAME
-                    });
-                    
-                    console.log(`✅ [Pixel ${PIXEL_ID}] Subscribe button tracked`);
-                }
-            } catch(e) {
-                console.error('Subscribe pixel error:', e);
-            }
-            
-            // Show confirmation
-            alert("✅ SUBSCRIPTION CONFIRMED! ✅\n\nThank you for subscribing to DEEPAK WADHWA\n\n📊 What you'll receive:\n• Daily NIFTY/BANKNIFTY calls (85-95% accuracy)\n• 4-5 observational calls daily\n• Stock Options insights & market analysis\n• FII/DII data & live updates\n\n🚀 Join Telegram for instant calls!");
-            
-            // Visual feedback
-            if (subBtn) {
-                const originalText = subBtn.innerHTML;
-                subBtn.innerHTML = "✅ SUBSCRIBED! THANK YOU ✅";
-                subBtn.style.background = "linear-gradient(135deg, #059669, #047857)";
-                subBtn.disabled = true;
-                setTimeout(() => {
-                    subBtn.innerHTML = originalText;
-                    subBtn.style.background = "linear-gradient(135deg, #dc2626, #b91c1c, #991b1b)";
-                    subBtn.disabled = false;
-                }, 4000);
-            }
-            return false;
-        }
-        
         // ---------- Attach Event Listeners ----------
         const topTeleBtn = document.getElementById('topJoinBtn');
         const bottomTeleBtn = document.getElementById('bottomJoinBtn');
@@ -564,12 +447,6 @@
             bottomTeleBtn.href = TELEGRAM_LINK;
             bottomTeleBtn.removeEventListener('click', trackTelegramClick);
             bottomTeleBtn.addEventListener('click', trackTelegramClick);
-        }
-        
-        const subscribeBtn = document.getElementById('subscribeButton');
-        if (subscribeBtn) {
-            subscribeBtn.removeEventListener('click', handleSubscribeClick);
-            subscribeBtn.addEventListener('click', handleSubscribeClick);
         }
         
         // ---------- Scroll Depth Tracking ----------
