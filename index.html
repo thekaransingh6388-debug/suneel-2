@@ -1,544 +1,498 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <title>Pankaj Bhardwaj – Educational Channel</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', 'Segoe UI', sans-serif;
-      background: #f8fafc;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .card {
-      max-width: 440px;
-      width: 100%;
-      background: #ffffff;
-      border-radius: 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), 0 8px 20px rgba(0, 0, 0, 0.02);
-      padding: 24px 20px 30px;
-      transition: all 0.2s;
-    }
-    /* header / live ticker */
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      background: #f1f5f9;
-      padding: 8px 12px;
-      border-radius: 60px;
-      margin-bottom: 20px;
-      color: #1e293b;
-    }
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      background: #22c55e;
-      border-radius: 50%;
-      display: inline-block;
-      animation: pulse-dot 1.4s infinite;
-    }
-    @keyframes pulse-dot { 0% { opacity: 1; } 50% { opacity: 0.3; } }
-    .ticker-wrap {
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      margin: 0 8px;
-    }
-    .ticker {
-      display: inline-block;
-      animation: scrollTicker 18s linear infinite;
-    }
-    .ticker span { margin-right: 32px; font-weight: 500; }
-    .watch { display: flex; align-items: center; gap: 4px; font-weight: 500; }
-    @keyframes scrollTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pankaj Bhardwaj - Way2Laabh Official</title>
+    
+    <!-- Meta Pixel Code (NEW) -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1135498315804860');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1135498315804860&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 
-    /* profile */
-    .profile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #e2e8f0;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.02);
-      background: #f1f5f9;
-    }
-    .verified-badge {
-      margin-top: -6px;
-      background: #2563eb;
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 12px 3px 10px;
-      border-radius: 40px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      letter-spacing: 0.3px;
-      border: 2px solid white;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.2);
-    }
-    .verified-badge svg { width: 14px; height: 14px; fill: white; }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    .title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-top: 10px;
-      letter-spacing: -0.3px;
-    }
-    .subhead {
-      color: #475569;
-      font-weight: 500;
-      font-size: 15px;
-      margin-top: 2px;
-    }
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --card-bg: #111411;
+            --card-border: #1f2a1f;
+            --accent-green: #25D366;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --text-green-light: #6ee7b7;
+        }
 
-    .btn-join {
-      width: 100%;
-      background: #1e293b;
-      border: none;
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
-      padding: 16px 10px;
-      border-radius: 60px;
-      margin: 16px 0 12px;
-      cursor: pointer;
-      transition: 0.2s;
-      letter-spacing: 0.3px;
-      box-shadow: 0 6px 0 #0f172a;
-      background: #0f172a;
-    }
-    .btn-join:active { transform: scale(0.97); box-shadow: 0 3px 0 #0f172a; }
-    .btn-join:hover { background: #1e293b; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      font-size: 14px;
-      color: #334155;
-      background: #f8fafc;
-      padding: 10px 12px;
-      border-radius: 60px;
-      margin-bottom: 14px;
-      font-weight: 500;
-    }
-    .stats span { font-weight: 700; color: #0f172a; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
 
-    .desc {
-      background: #f8fafc;
-      padding: 18px 16px;
-      border-radius: 24px;
-      font-size: 15px;
-      line-height: 1.7;
-      color: #1e293b;
-      margin: 8px 0 10px;
-      border: 1px solid #eef2f6;
-    }
-    .desc strong { color: #0f172a; font-weight: 700; }
-    .highlight { 
-      background: #dbeafe; 
-      padding: 0 6px;
-      border-radius: 12px;
-      font-weight: 600;
-      color: #1e3a8a;
-    }
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #050505;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.05);
+            border: 1px solid #111;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin: 14px 0 12px;
-    }
-    .tag {
-      background: #f1f5f9;
-      color: #1e293b;
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 13px;
-      font-weight: 500;
-    }
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-    .feature-grid {
-      display: flex;
-      gap: 8px;
-      margin: 16px 0 12px;
-    }
-    .feature-item {
-      flex: 1;
-      background: #f8fafc;
-      border-radius: 16px;
-      padding: 12px 6px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #0f172a;
-      text-align: center;
-      border: 1px solid #eef2f6;
-    }
-    .feature-item span { display: block; font-weight: 400; font-size: 11px; color: #475569; margin-top: 2px; }
+        .profile-img-container {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(180deg, #25D366, #0a0a0a);
+            position: relative;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+        }
 
-    .trust {
-      background: #f1f5f9;
-      padding: 14px 16px;
-      border-radius: 24px;
-      font-size: 14px;
-      color: #1e293b;
-      margin: 16px 0 10px;
-      text-align: center;
-      font-weight: 500;
-      border: 1px solid #e2e8f0;
-    }
-    .trust span { display: inline-block; margin: 0 6px; }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #000;
+        }
 
-    .disclaimer {
-      font-size: 11px;
-      color: #94a3b8;
-      text-align: center;
-      margin: 18px 0 0;
-      border-top: 1px solid #eef2f6;
-      padding-top: 16px;
-      letter-spacing: 0.2px;
-    }
-    .disclaimer strong { color: #64748b; }
+        .live-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            background-color: var(--accent-green);
+            color: #000;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            border: 2px solid #000;
+        }
 
-    /* toast */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0f172a;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 14px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-      z-index: 999;
-    }
-    .toast.show { opacity: 1; }
+        .separator {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #25D366, #f59e0b, transparent);
+            margin-bottom: 20px;
+        }
 
-    .popup-float {
-      position: fixed;
-      bottom: 100px;
-      left: 20px;
-      background: #ffffff;
-      padding: 10px 16px;
-      border-radius: 40px;
-      font-size: 13px;
-      font-weight: 500;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-      border: 1px solid #eef2f6;
-      color: #0f172a;
-      display: none;
-    }
-    @media (min-width: 600px) {
-      .card { padding: 32px 28px; }
-    }
-  </style>
+        /* Header Badges */
+        .official-badge {
+            background: linear-gradient(90deg, #0f2e1a, #1a4a2a);
+            color: var(--text-green-light);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border: 1px solid #25D366;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .official-badge i {
+            color: var(--accent-green);
+        }
+
+        .profile-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
+        }
+
+        .profile-name i {
+            color: #3b82f6; /* Blue tick */
+            font-size: 20px;
+        }
+
+        /* Sub Badges */
+        .sub-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .sub-badge {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .sub-badge span {
+            color: var(--accent-green);
+        }
+
+        .disclaimer-text {
+            color: #666;
+            font-size: 11px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: linear-gradient(180deg, #25D366, #1da851);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            gap: 10px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .cta-btn i {
+            background: #fff;
+            color: #25D366;
+            border-radius: 50%;
+            padding: 2px;
+            font-size: 14px;
+        }
+
+        /* Grid Cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .grid-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 15px 5px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .grid-card i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .grid-card .title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .grid-card .subtitle {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        /* Specific colors for grid icons */
+        .icon-nifty { color: #8b5cf6; }
+        .icon-bank { color: #a855f7; }
+        .icon-sensex { color: #ec4899; }
+        .icon-gold { color: #f59e0b; }
+        .icon-forex { color: #3b82f6; }
+        .icon-crypto { color: #eab308; }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 10px 5px;
+            text-align: center;
+        }
+
+        .stat-item .val {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .stat-item .lbl {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        /* List Items */
+        .list-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            gap: 15px;
+            transition: background 0.3s;
+        }
+
+        .list-item:hover {
+            background-color: #1a1a1a;
+        }
+
+        .list-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #0d1f12;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--accent-green);
+            flex-shrink: 0;
+            border: 1px solid #25D36633;
+        }
+
+        .list-content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .list-content p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer p {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 5px;
+        }
+
+        .agency-text {
+            font-size: 11px;
+            color: #888;
+            font-weight: 600;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .profile-name { font-size: 22px; }
+            .grid-card .title { font-size: 11px; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </head>
 <body>
-<div class="card">
 
-  <!-- header / ticker -->
-  <div class="header">
-    <span class="live-dot"></span>
-    <span style="font-weight:600;">LIVE</span>
-    <div class="ticker-wrap">
-      <div class="ticker" id="tickerText">
-        <span>NIFTY 50 ▲ 0.28%</span>
-        <span>BANK NIFTY ▲ 0.41%</span>
-        <span>BTC ▲ 1.2%</span>
-        <span>NIFTY 50 ▲ 0.28%</span>
-        <span>BANK NIFTY ▲ 0.41%</span>
-        <span>BTC ▲ 1.2%</span>
-      </div>
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-img-container">
+                <!-- Updated Logo URL -->
+                <img src="https://karanmetalabe.com/wp-content/uploads/2025/11/download-9.jpg" alt="Pankaj Bhardwaj" class="profile-img">
+                <span class="live-badge">LIVE</span>
+            </div>
+            <div class="separator"></div>
+            
+            <div class="official-badge">
+                <i class="fas fa-heart"></i> WAY2LAABH OFFICIAL <i class="fas fa-heart"></i>
+            </div>
+            
+            <h1 class="profile-name">
+                Pankaj Bhardwaj <i class="fas fa-check-circle"></i>
+            </h1>
+
+            <div class="sub-badges">
+                <span class="sub-badge">🎯 Way2Laabh - Free Market Awareness Community</span>
+                <span class="sub-badge">Free Financial Literacy - India 🇮🇳 - Educational Content Only</span>
+                <span class="sub-badge">🎯 Educational Awareness Only - Not Financial Advice</span>
+            </div>
+        </div>
+
+        <!-- Main CTA Button with Event Tracking (updated link + Lead event) -->
+        <a href="https://t.me/+i85K9n71zPI1N2Q1" class="cta-btn" onclick="fbq('track', 'Lead');">
+            <i class="fas fa-play"></i> Join Free Community Now
+        </a>
+
+        <!-- Grid Section 1 -->
+        <div class="grid-3">
+            <div class="grid-card">
+                <i class="fas fa-chart-line icon-nifty"></i>
+                <div class="title">NIFTY</div>
+                <div class="subtitle">Awareness</div>
+            </div>
+            <div class="grid-card">
+                <i class="fas fa-university icon-bank"></i>
+                <div class="title">BANKNIFTY</div>
+                <div class="subtitle">Education</div>
+            </div>
+            <div class="grid-card">
+                <i class="fas fa-chart-bar icon-sensex"></i>
+                <div class="title">SENSEX</div>
+                <div class="subtitle">Awareness</div>
+            </div>
+            <div class="grid-card">
+                <i class="fas fa-coins icon-gold"></i>
+                <div class="title">GOLD</div>
+                <div class="subtitle">Awareness</div>
+            </div>
+            <div class="grid-card">
+                <i class="fas fa-exchange-alt icon-forex"></i>
+                <div class="title">FOREX</div>
+                <div class="subtitle">Concepts</div>
+            </div>
+            <div class="grid-card">
+                <i class="fab fa-bitcoin icon-crypto"></i>
+                <div class="title">CRYPTO</div>
+                <div class="subtitle">Education</div>
+            </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="val">Free</div>
+                <div class="lbl">Always</div>
+            </div>
+            <div class="stat-item">
+                <div class="val">6+</div>
+                <div class="lbl">Markets</div>
+            </div>
+            <div class="stat-item">
+                <div class="val">Daily</div>
+                <div class="lbl">Content</div>
+            </div>
+            <div class="stat-item">
+                <div class="val">India</div>
+                <div class="lbl">Wide</div>
+            </div>
+        </div>
+
+        <!-- List Items -->
+        <div class="list-item">
+            <div class="list-icon"><i class="fas fa-chart-pie"></i></div>
+            <div class="list-content">
+                <h4>Market Awareness Basics</h4>
+                <p>How financial markets work — educational only</p>
+            </div>
+        </div>
+
+        <div class="list-item">
+            <div class="list-icon"><i class="fas fa-newspaper"></i></div>
+            <div class="list-content">
+                <h4>Financial News & Analysis</h4>
+                <p>Understand economic news clearly</p>
+            </div>
+        </div>
+
+        <div class="list-item">
+            <div class="list-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="list-content">
+                <h4>Risk Awareness Education</h4>
+                <p>Understanding market risk — essential</p>
+            </div>
+        </div>
+
+        <div class="list-item">
+            <div class="list-icon"><i class="fas fa-book-open"></i></div>
+            <div class="list-content">
+                <h4>Index Education</h4>
+                <p>Nifty, BankNifty, Sensex — awareness only</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Free educational awareness only - Not investment advice - Market investments involve risk.</p>
+            <p>Contact: Way2Laabh</p>
+            <div class="agency-text">Ad Manage by Karan Agency</div>
+        </div>
     </div>
-    <div class="watch">👁️ <span id="watchCount">1.2k</span></div>
-  </div>
 
-  <!-- profile -->
-  <div class="profile">
-    <img class="avatar" src="https://telegram-ads.riyazshaikh.com/wp-content/uploads/2025/08/pankaj-image-2.jpg" alt="Pankaj Bhardwaj">
-    <div class="verified-badge" style="margin-top: 6px;">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-      Verified · Education
-    </div>
-  </div>
-
-  <div class="title">Pankaj Bhardwaj</div>
-  <div class="subhead">Official Educational Channel</div>
-
-  <!-- BUTTON 1 - below name -->
-  <button class="btn-join" id="joinBtn1" data-position="below_name">📘 Join Channel – Free Access</button>
-
-  <!-- stats -->
-  <div class="stats">
-    <span>👥 10k+ Learners</span>
-    <span>📊 Daily Updates</span>
-  </div>
-
-  <!-- description : pure educational, no trading promises -->
-  <div class="desc">
-    <strong>📚 Educational content</strong> — market awareness, risk management, 
-    and financial literacy. <span class="highlight">#KnowledgeFirst</span><br>
-    <span style="font-size:14px; color:#475569;">📌 For learning purposes only. No investment advice.</span>
-  </div>
-
-  <!-- tags -->
-  <div class="tags">
-    <span class="tag">📊 Stocks</span>
-    <span class="tag">📉 Index</span>
-    <span class="tag">💹 F&O Basics</span>
-    <span class="tag">🪙 Crypto Awareness</span>
-  </div>
-
-  <!-- feature grid -->
-  <div class="feature-grid">
-    <div class="feature-item">👥 10K+ <span>community</span></div>
-    <div class="feature-item">📈 Daily <span>market wrap</span></div>
-    <div class="feature-item">🆓 Free <span>education</span></div>
-  </div>
-
-  <!-- BUTTON 2 - bottom -->
-  <button class="btn-join" id="joinBtn2" data-position="bottom">📘 Join Channel – Free Access</button>
-
-  <!-- trust / risk management (educational) -->
-  <div class="trust">
-    <span>🛡️ Risk management</span> · 
-    <span>📊 Market awareness</span> · 
-    <span>⏳ Timely updates</span>
-  </div>
-
-  <div class="disclaimer">
-    <strong>Disclaimer:</strong> This channel provides educational and informational content only. 
-    Not financial or trading advice. Always consult a qualified advisor.
-  </div>
-</div>
-
-<!-- Toast -->
-<div id="toastMessage" class="toast">✅ Event tracked</div>
-
-<!-- floating popup (demo) -->
-<div id="popupFloat" class="popup-float">💰 Rahul made profit ₹12,000</div>
-
-<script>
-  (function() {
-    // --- CONFIG (updated with new pixel & channel) ---
-    const TELEGRAM_LINK = "https://t.me/+i85K9n71zPI1N2Q1";   // new channel link
-    const PIXEL_ID = "1135498315804860";                       // new pixel ID
-    const BRAND = "PANKAJ_BHARDWAJ";
-
-    // toast helper
-    function showToast(msg, duration = 1500) {
-      const t = document.getElementById('toastMessage');
-      if (!t) return;
-      t.textContent = msg || '✅ Event tracked';
-      t.classList.add('show');
-      clearTimeout(t._hide);
-      t._hide = setTimeout(() => t.classList.remove('show'), duration);
-    }
-
-    // safe fbq (fallback)
-    function safeFbq() {
-      if (typeof fbq !== 'undefined' && fbq && typeof fbq === 'function') return fbq;
-      window.fbq = window.fbq || function() { console.log('[fbq fallback]', arguments); };
-      return window.fbq;
-    }
-
-    // track function (simplified, educational context)
-    function trackJoin(button) {
-      const pos = button ? button.getAttribute('data-position') || 'unknown' : 'unknown';
-      const ts = new Date().toISOString();
-      const session = Math.random().toString(36).substring(2,10);
-
-      try {
-        const fbqFunc = safeFbq();
-        if (typeof fbqFunc === 'function') {
-          // Lead - educational interest
-          fbqFunc('track', 'Lead', {
-            content_name: `${BRAND}_Telegram_Edu`,
-            content_category: 'Education_Channel',
-            cta_text: 'Join Channel – Free Access',
-            button_position: pos,
-            telegram_invite: TELEGRAM_LINK,
-            session_id: session,
-            timestamp: ts,
-            brand: BRAND,
-            pixel_id: PIXEL_ID
-          });
-          // Subscribe - free educational subscription
-          fbqFunc('track', 'Subscribe', {
-            content_name: `${BRAND}_Edu_Channel`,
-            status: 'subscribed',
-            button_position: pos,
-            channel_name: BRAND,
-            subscription_method: 'telegram_join',
-            pixel_id: PIXEL_ID
-          });
-          // Custom event: educational interest
-          fbqFunc('trackCustom', 'EducationalChannelJoin', {
-            channel: BRAND,
-            button_position: pos,
-            source: 'landing_page',
-            pixel_id: PIXEL_ID
-          });
-          showToast('✅ Joined! Tracking complete', 1500);
-          console.log(`✅ Pixel events sent | Pixel: ${PIXEL_ID} | Button: ${pos}`);
-        } else {
-          showToast('📱 Opening channel...', 1200);
-        }
-      } catch (e) {
-        console.warn('Tracking error:', e);
-      }
-    }
-
-    // attach to buttons
-    function attachButton(id, label) {
-      const btn = document.getElementById(id);
-      if (!btn) return;
-      let blocked = false;
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (blocked) return;
-        blocked = true;
-        trackJoin(btn);
-        setTimeout(() => {
-          window.open(TELEGRAM_LINK, '_blank');
-          blocked = false;
-        }, 280);
-      });
-    }
-
-    // scroll depth (educational)
-    function initScroll() {
-      let depths = {25:false,50:false,75:false};
-      window.addEventListener('scroll', function() {
-        const fbqFunc = safeFbq();
-        if (typeof fbqFunc !== 'function') return;
-        const pct = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-        if (pct >= 0.25 && !depths[25]) { depths[25]=true; fbqFunc('trackCustom','ScrollDepth',{depth:25,page:'edu_landing',pixel_id:PIXEL_ID}); }
-        if (pct >= 0.50 && !depths[50]) { depths[50]=true; fbqFunc('trackCustom','ScrollDepth',{depth:50,page:'edu_landing',pixel_id:PIXEL_ID}); }
-        if (pct >= 0.75 && !depths[75]) { depths[75]=true; fbqFunc('trackCustom','ScrollDepth',{depth:75,page:'edu_landing',pixel_id:PIXEL_ID}); }
-      });
-    }
-
-    // time on page (education)
-    function initTime() {
-      let start = Date.now();
-      window.addEventListener('beforeunload', function() {
-        const fbqFunc = safeFbq();
-        if (typeof fbqFunc !== 'function') return;
-        const sec = Math.floor((Date.now() - start)/1000);
-        if (sec > 3) fbqFunc('trackCustom','TimeOnPage',{duration:sec,page:'edu_channel',pixel_id:PIXEL_ID});
-      });
-    }
-
-    // --- DOM ready ---
-    function initAll() {
-      attachButton('joinBtn1', 'below_name');
-      attachButton('joinBtn2', 'bottom');
-      initScroll();
-      initTime();
-      // enhanced PageView
-      const fbqFunc = safeFbq();
-      if (typeof fbqFunc === 'function') {
-        fbqFunc('track', 'PageView', {
-          page_type: 'educational_telegram_landing',
-          brand: BRAND,
-          pixel_id: PIXEL_ID,
-          buttons: 2
-        });
-        console.log(`🔥 ${BRAND} | Edu compliant | Pixel ${PIXEL_ID}`);
-      }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initAll);
-    } else {
-      initAll();
-    }
-
-    // ---- Ticker & watch count (demo) ----
-    function updateTicker() {
-      const ticker = document.getElementById('tickerText');
-      if (!ticker) return;
-      const items = [
-        {name:'NIFTY 50', chg:(Math.random()*0.8-0.2).toFixed(2)},
-        {name:'BANK NIFTY', chg:(Math.random()*0.8-0.2).toFixed(2)},
-        {name:'BTC', chg:(Math.random()*1.2-0.3).toFixed(2)}
-      ];
-      let html = '';
-      items.forEach(i => {
-        const up = parseFloat(i.chg) >= 0;
-        html += `<span>${i.name} ${up?'▲':'▼'} ${Math.abs(parseFloat(i.chg)).toFixed(2)}%</span>`;
-      });
-      // duplicate for seamless scroll
-      ticker.innerHTML = html + html;
-    }
-    updateTicker();
-    setInterval(updateTicker, 5000);
-
-    let watchCount = 1247;
-    setInterval(() => {
-      watchCount += Math.floor(Math.random() * 3);
-      document.getElementById('watchCount').innerText = watchCount > 999 ? (watchCount/1000).toFixed(1)+'k' : watchCount;
-    }, 3500);
-
-    // popup (demo)
-    const names = ['Rahul','Sneha','Amit','Priya','Vikas'];
-    const popup = document.getElementById('popupFloat');
-    if (popup) {
-      setInterval(() => {
-        const name = names[Math.floor(Math.random() * names.length)];
-        const amt = Math.floor(Math.random() * 40 + 5) * 1000;
-        popup.textContent = `💰 ${name} made profit ₹${amt.toLocaleString()}`;
-        popup.style.display = 'block';
-        setTimeout(() => { popup.style.display = 'none'; }, 2800);
-      }, 8000);
-    }
-
-    // final log
-    console.log(`✅ Pixel ID: ${PIXEL_ID} | Telegram: ${TELEGRAM_LINK}`);
-    console.log(`✅ Educational theme – Meta compliant`);
-  })();
-</script>
-
-<!-- Meta Pixel Code (NEW) – pixel ID 1135498315804860 -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1135498315804860');
-  fbq('track', 'PageView');
-</script>
-<noscript>
-  <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1135498315804860&ev=PageView&noscript=1"/>
-</noscript>
-<!-- End Meta Pixel Code -->
 </body>
 </html>
